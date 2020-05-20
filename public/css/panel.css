@@ -47,10 +47,12 @@ Slide In Panel - by CodyHouse.co
   font-size: 2rem;
   color: #64788c;
 }
-
+.icons{
+  padding: 10px 10px;
+}
 .cd-btn {
   position: relative;
-  display: inline-block;
+  display: block;
   padding: .7em .5em;
   color: #ffffff;
   border-radius: 20em;
