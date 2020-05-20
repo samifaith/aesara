@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Aesara FED Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="css/panel.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main class="cd-main-content">
+    <header>
+      <img src="windrose.png" alt="">
+      <div class="icons">
+        <a href="#" class="cd-btn"><i class="fas fa-user-circle"></i></a>
+        <a href="#" class="cd-btn"><i class="far fa-file-alt"></i></a>
+        <a href="#0" class="cd-btn js-cd-panel-trigger" data-panel="main"><i class="far fa-clock"></i></a>
+        <a href="#" class="cd-btn"><i class="fas fa-cog"></i></a>
+      </div>
+    </header>
+    <div class="hero">
+      <section class="onePanel">
+        <section id="h1">
+          <textarea id="textArea" disabled="true" >Gammamab for Sugimoto Dementia</textarea>
+          <a id="edit" role="button" href="#" title="Edit"> edit</a>
+        </section>
+        <p>Develop SD-911 as an oral therapy to target aspects of dementia and mental dysfunction in Sugiomoto Disease (SD), delaying long-term manifestations that has significant impant on patients and their families</p>
+        <h2>KEY MARKETS</h2>
+        <img src="Strategy-Overview.png" alt="">
+      </section>
+      <section class="twoPanel">
+        <div class="list" id="list">
+          <div class="slides oneSlide">
+            <img src="Img2.jpg" alt="">
+            <h3>TARGET PRODUCT PROFILE</h3>
+            <p>Generate robust burden of illness data to characterize current treatment patterns and unmet needs with standard care</p>
+            <p>Q1 2021</p>
+          </div>
+          <div class="slides twoSlide">
+            <img src="Img1.jpg" alt="">
+            <h3>STRATEGIC IMPERATIVES</h3>
+            <p>Generate robust burden of illness data to characterize current treatment patterns and unmet needs with standard care</p>
+          </div>
+          <div class="slides threeSlide">
+            <img src="Img3.jpg" alt="">
+            <h3>COMPETITIVE LANDSCAPE</h3>
+            <ul>
+              <li>Drug 1</li>
+              <li>Drug 2</li>
+              <li>Drug 3 (2023)</li>
+            </ul>
+          </div>
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="pages" id="pagination">
+          <span class="dots" onclick="currentSlide(1)"></span>
+          <span class="dots" onclick="currentSlide(2)"></span>
+          <span class="dots" onclick="currentSlide(3)"></span>
+        </div>
+      </section>
+      <section class="threePanel">
+        <h4>Value Messages</h4>
+        <div class="scale">
+          <p>ASPIRATIONAL</p>
+          <p>KNOWN</p>
+        </div>
+        <div class="line"></div>
+        <div class="chart">
+          <canvas id="myChart"></canvas>
+        </div>
+        <h4>ACTIVITIES</h4>
+        <p>DELIVERABLES</p>
+        <h4>EVIDENCE</h4>
+        <h4>GAP ANALYSIS</h4>
+      </section>
+    </div>
+  </main>
+    <div class="cd-panel cd-panel--from-right js-cd-panel-main">
+  		<header class="cd-panel__header">
+  			<h5>Activity Feed</h5>
+  			<a href="#0" class="cd-panel__close js-cd-close">Close</a>
+  		</header>
+
+  		<div class="cd-panel__container">
+  			<div class="cd-panel__content">
+          <form id="form">
+            <div class="form-group">
+              <input
+                type="text"
+                id="activity-text"
+                class="form-control bg-dark"
+                placeholder="Enter Activity"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                id="activity-viewer"
+                class="form-control bg-dark"
+                placeholder="Enter your Name"
+                required
+              />
+            </div>
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+              Submit Activity
+            </button>
+          </form>
+
+            <div id="activity-box">
+
+            </div>
+
+        </div>
+      </div>
+  	</div>
+  </div>
+
+
+  </body>
+
+  <script type="module" src="chart.js"></script>
+  <script src="https://unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+  <script type="text/javascript">
+      // Socket.io setup
+      const socket = io('http://localhost:3030');
+   
+      // Init feathers app
+      const app = feathers();
+
+      // Register socket.io to talk to server
+      app.configure(feathers.socketio(socket));
+
+      document.getElementById('form').addEventListener('submit', sendActivity);
+
+      async function sendActivity(e) {
+        e.preventDefault();
+
+        const text = document.getElementById('activity-text');
+        const viewer = document.getElementById('activity-viewer');
+
+        // Create new activity
+        app.service('activities').create({
+          text: text.value,
+          viewer: viewer.value
+        });
+
+        // Clear inputs
+        text.value = '';
+        viewer.value = '';
+      }
+
+      function renderActivity(activity) {
+        document.getElementById(
+          'activity-box'
+        ).innerHTML += `<div class="card">
+              <div class="card-body">
+                <p class="lead">
+                  ${activity.text}
+                  <br />
+                  <em>Submitted by ${activity.viewer}</em>
+                  <br />
+                  <small>${activity.time}</small>
+                </p>
+              </div>
+            </div>`;
+      }
+
+      async function init() {
+        // Find activity
+        const activities = await app.service('activities').find();
+
+        // Add existing activity to list
+        activities.forEach(renderActivity);
+
+        // Add activity in realtime
+        app.service('activities').on('created', renderActivity);
+      }
+
+      init();
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="panel.js"></script>
+
+
+</html>

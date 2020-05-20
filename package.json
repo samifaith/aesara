@@ -1,0 +1,26 @@
+{
+  "name": "aesara-vanillajs",
+  "version": "1.0.0",
+  "description": "Take Home File for Aesara",
+  "main": "index.js",
+  "dependencies": {
+    "@feathersjs/express": "^4.5.4",
+    "@feathersjs/feathers": "^4.5.3",
+    "@feathersjs/socketio": "^4.5.4",
+    "body-parser": "^1.19.0",
+    "chart.js": "^2.9.3",
+    "expres": "^0.0.5",
+    "express": "^4.17.1",
+    "heatmapjs": "^2.0.2",
+    "moment": "^2.25.3",
+    "node": "^14.2.0",
+    "socket.io": "^2.3.0",
+    "vscode": "^1.1.37"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sam DeCoteau",
+  "license": "ISC"
+}
