@@ -13,13 +13,14 @@
     "express": "^4.17.1",
     "heatmapjs": "^2.0.2",
     "moment": "^2.25.3",
-    "node": "^14.2.0",
+    "node": "^12.16.x",
     "socket.io": "^2.3.0",
     "vscode": "^1.1.37"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app.js"
   },
   "author": "Sam DeCoteau",
   "license": "ISC"
