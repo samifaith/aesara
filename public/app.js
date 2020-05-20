@@ -37,8 +37,9 @@ app.configure(socketio());
 // Enable REST services
 app.configure(express.rest());
 // Register services
-app.use(express.static('/activity', new ActivityService()));
-
+app.use('/activity', new ActivityService());
+let pathName = __dirname;
+// console.log(pathName)
 app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
