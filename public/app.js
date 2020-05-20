@@ -2,28 +2,28 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 const moment = require('moment');
-
+const path = require('path')
 
 // Idea Service
 class ActivityService {
   constructor(){
-    this.activities = [];
+    this.activity = [];
   }
 
   async find() {
-    return this.activities;
+    return this.activity;
   }
 
   async create(data){
     const activity = {
-      id: this.activities.length,
+      id: this.activity.length,
       text: data.text,
       viewer: data.viewer
     }
 
     activity.time = moment().format('h:mm:ss a');
 
-    this.activities.push(activity);
+    this.activity.push(activity);
 
     return activity;
   }
@@ -37,8 +37,13 @@ app.configure(socketio());
 // Enable REST services
 app.configure(express.rest());
 // Register services
-app.use('/activities', new ActivityService());
+app.use(express.static('/activity', new ActivityService()));
 
+app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
+})
 // New connections connect to stream channel
 app.on('connection', conn => app.channel('stream').join(conn));
 // Publish events to stream

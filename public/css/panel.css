@@ -35,7 +35,7 @@ Slide In Panel - by CodyHouse.co
 .form-control{
   width: 100%;
 }
-.form-control input{
+.form-control input, #activity-text, #activity-viewer{
   color: #64788c;
 
 }

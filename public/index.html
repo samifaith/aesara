@@ -71,7 +71,7 @@
         <div class="chart">
           <canvas id="myChart"></canvas>
         </div>
-        <h4>ACTIVITIES</h4>
+        <h4>Activities</h4>
         <p>DELIVERABLES</p>
         <h4>EVIDENCE</h4>
         <h4>GAP ANALYSIS</h4>
@@ -146,7 +146,7 @@
         const viewer = document.getElementById('activity-viewer');
 
         // Create new activity
-        app.service('activities').create({
+        app.service('activity').create({
           text: text.value,
           viewer: viewer.value
         });
@@ -174,13 +174,13 @@
 
       async function init() {
         // Find activity
-        const activities = await app.service('activities').find();
+        const activity = await app.service('activity').find();
 
         // Add existing activity to list
-        activities.forEach(renderActivity);
+        activity.forEach(renderActivity);
 
         // Add activity in realtime
-        app.service('activities').on('created', renderActivity);
+        app.service('activity').on('created', renderActivity);
       }
 
       init();
