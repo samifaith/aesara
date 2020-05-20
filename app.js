@@ -2,8 +2,9 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 const moment = require('moment');
+const bodyParser = require('body-parser');
+
 const path = require('path')
-require('./app.js')
 
 // Idea Service
 class ActivityService {
@@ -31,6 +32,9 @@ class ActivityService {
 }
 
 const app = express(feathers());
+// require('./app/routes.js')(app)
+const pathFile = __dirname
+// console.log(pathFile)
 // Parse JSON
 app.use(express.json());
 // Config Socket.io realtime APIs
@@ -39,13 +43,15 @@ app.configure(socketio());
 app.configure(express.rest());
 // Register services
 app.use('/activity', new ActivityService());
-let pathName = __dirname;
 // console.log(pathName)
-app.use(express.static(__dirname));
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.render(__dirname + 'index.html');
 })
+
 // New connections connect to stream channel
 app.on('connection', conn => app.channel('stream').join(conn));
 // Publish events to stream
