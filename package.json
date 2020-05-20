@@ -2,7 +2,7 @@
   "name": "aesara-vanillajs",
   "version": "1.0.0",
   "description": "Take Home File for Aesara",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "@feathersjs/express": "^4.5.4",
     "@feathersjs/feathers": "^4.5.3",
@@ -19,7 +19,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app.js"
   },
   "author": "Sam DeCoteau",
   "license": "ISC"
