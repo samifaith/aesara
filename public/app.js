@@ -3,6 +3,7 @@ const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 const moment = require('moment');
 const path = require('path')
+require('./app.js')
 
 // Idea Service
 class ActivityService {
