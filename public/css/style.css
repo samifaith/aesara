@@ -118,7 +118,16 @@ p, span {
 
 .slides{
   width: 100%;
-  height: 50vh;
+  height: 55vh;
+}
+.tpp{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid grey;
+}
+
+.tpp{
+  font-size: 25px;
 }
 /* PANEL THREE */
 .threePanel {
