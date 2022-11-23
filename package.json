@@ -14,7 +14,7 @@
     "heatmapjs": "^2.0.2",
     "moment": "^2.25.3",
     "node": "^14.2.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "vscode": "^1.1.37"
   },
   "devDependencies": {},
